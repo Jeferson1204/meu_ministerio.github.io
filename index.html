@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacote Digital Ministerial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --cor-primaria: #6a1b9a; /* Roxo escuro */
+            --cor-secundaria: #fbc02d; /* Amarelo */
+            --cor-destaque: #e65100; /* Laranja forte */
+            --cor-texto-claro: #fff;
+            --cor-texto-escuro: #333;
+            --cor-fundo-geral: #f8f9fa;
+            --cor-card: #fff;
+            --cor-footer: #333;
+            --fonte-principal: 'Poppins', sans-serif;
+            --fonte-secundaria: 'Montserrat', sans-serif;
+            --fonte-texto: 'Open Sans', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--fonte-texto);
+            line-height: 1.7;
+            color: var(--cor-texto-escuro);
+            background-color: var(--cor-fundo-geral);
+            overflow-x: hidden;
+            padding-top: 70px; /* Espaço para o header fixo */
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header/Menu Fixo */
+        .site-header {
+            background-color: var(--cor-primaria);
+            color: var(--cor-texto-claro);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Permite quebra de linha em telas pequenas */
+        }
+
+        .site-title {
+            font-family: var(--fonte-secundaria);
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0;
+            color: var(--cor-texto-claro);
+        }
+
+        .main-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        .main-nav li {
+            margin-left: 25px;
+        }
+
+        .main-nav a {
+            color: var(--cor-texto-claro);
+            text-decoration: none;
+            font-family: var(--fonte-principal);
+            font-weight: 600;
+            font-size: 1.05em;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--cor-secundaria); /* Amarelo no hover */
+        }
+
+        /* Hamburger Menu para Mobile */
+        .menu-toggle {
+            display: none; /* Oculto por padrão */
+            background: none;
+            border: none;
+            color: var(--cor-texto-claro);
+            font-size: 1.8em;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+
+        .section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .section--hero {
+            background-color: var(--cor-primaria);
+            color: var(--cor-texto-claro);
+            padding-top: 20px; /* Ajustado devido ao header fixo */
+            padding-bottom: 60px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40vh; /* Altura ajustada sem imagem de fundo */
+        }
+
+        .section--hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .section--hero h1 {
+            font-family: var(--fonte-secundaria);
+            font-size: 3em; /* Ajustado para ser mais direto */
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--cor-texto-claro);
+        }
+
+        .section--hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #e0e0e0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: var(--cor-destaque);
+            color: var(--cor-texto-claro);
+            font-family: var(--fonte-principal);
+            font-size: 1.2em;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(230, 81, 0, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px; /* Adiciona um pequeno espaço acima do botão se houver preço antes */
+        }
+
+        .cta-button:hover {
+            background-color: var(--cor-secundaria);
+            color: var(--cor-primaria);
+            box-shadow: 0 8px 20px rgba(251, 192, 45, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .section--benefits h2 {
+            font-family: var(--fonte-secundaria);
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: var(--cor-primaria);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .benefit-card {
+            background-color: var(--cor-card);
+            padding: 30px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .benefit-card .icon-container {
+            width: 70px;
+            height: 70px;
+            background-color: var(--cor-secundaria);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(251, 192, 45, 0.5);
+        }
+
+        .benefit-card .icon-container i {
+            font-size: 2em;
+            color: var(--cor-primaria);
+        }
+
+        .benefit-card h3 {
+            font-family: var(--fonte-secundaria);
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: var(--cor-primaria);
+        }
+
+        .benefit-card p {
+            font-size: 1.05em;
+            color: #555;
+        }
+
+        .bonus-section {
+            background-color: #e8f5e9; /* Verde claro */
+            padding: 60px 0;
+        }
+
+        .bonus-section h2 {
+            font-family: var(--fonte-secundaria);
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: var(--cor-primaria);
+        }
+
+        .bonus-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .bonus-content .text-content {
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .bonus-content h3 {
+            font-family: var(--fonte-secundaria);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: var(--cor-primaria);
+        }
+
+        .bonus-content ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .bonus-content li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 1.1em;
+            color: #444;
+        }
+
+        .bonus-content li i {
+            margin-right: 15px;
+            font-size: 1.3em;
+            color: var(--cor-destaque);
+            min-width: 25px;
+        }
+
+        .delivery-section {
+            padding: 60px 0;
+            background-color: #fff3e0; /* Laranja claro */
+        }
+
+        .delivery-section h2 {
+            font-family: var(--fonte-secundaria);
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: var(--cor-primaria);
+        }
+
+        .delivery-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .delivery-content .icon-text {
+            display: flex;
+            align-items: center;
+            font-size: 1.15em;
+            background-color: var(--cor-card);
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .delivery-content .icon-text i {
+            margin-right: 15px;
+            font-size: 1.8em;
+            color: var(--cor-destaque);
+            min-width: 30px;
+        }
+
+        .target-audience-section {
+            padding: 60px 0;
+        }
+
+        .target-audience-section h2 {
+            font-family: var(--fonte-secundaria);
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: var(--cor-primaria);
+        }
+
+        .target-audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .target-card {
+            background-color: var(--cor-card);
+            padding: 25px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .target-card .icon-container {
+            width: 60px;
+            height: 60px;
+            background-color: var(--cor-secundaria);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .target-card .icon-container i {
+            font-size: 1.8em;
+            color: var(--cor-primaria);
+        }
+
+        .target-card p {
+            font-weight: 600;
+            font-size: 1.1em;
+            color: var(--cor-primaria);
+        }
+
+        /* Seção de Garantia */
+        .guarantee-section {
+            background-color: #eceff1; /* Cinza azulado claro */
+            padding: 50px 0;
+            margin-top: 40px;
+        }
+
+        .guarantee-section h2 {
+            font-family: var(--fonte-secundaria);
+            font-size: 2.3em;
+            margin-bottom: 30px;
+            color: var(--cor-primaria);
+        }
+
+        .guarantee-section p {
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #444;
+        }
+        .guarantee-section .highlight {
+            color: var(--cor-destaque);
+            font-weight: bold;
+        }
+
+        /* Seção de Depoimentos */
+        .testimonials-section {
+            background-color: var(--cor-card); /* Fundo branco para destacar */
+            padding: 70px 0; /* Padding maior */
+        }
+
+        .testimonials-section h2 {
+            font-family: var(--fonte-secundaria);
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            color: var(--cor-primaria);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajustado para caber 2 ou 3 por linha */
+            gap: 40px; /* Espaço maior entre os depoimentos */
+        }
+
+        .testimonial-card {
+            background-color: var(--cor-fundo-geral); /* Fundo levemente cinza */
+            padding: 35px 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
+            text-align: left; /* Alinha o texto à esquerda */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Para alinhar o nome no final */
+        }
+
+        .testimonial-card .quote {
+            font-size: 1.15em;
+            color: #555;
+            margin-bottom: 25px;
+            font-style: italic; /* Citação em itálico */
+            position: relative; /* Para o ícone de aspas */
+        }
+
+        .testimonial-card .quote::before {
+            content: '"'; /* Ícone de aspas de abertura */
+            font-size: 2.5em;
+            color: var(--cor-secundaria); /* Cor amarela para as aspas */
+            position: absolute;
+            left: -15px; /* Posiciona as aspas levemente fora */
+            top: -10px;
+            opacity: 0.7;
+        }
+
+        .testimonial-card .author {
+            font-family: var(--fonte-secundaria);
+            font-weight: 700;
+            font-size: 1.1em;
+            color: var(--cor-primaria);
+            margin-top: auto; /* Empurra o autor para o final do card */
+        }
+
+        /* Container para preço e botão final */
+        .final-cta-container {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .final-cta-container .price-info-final {
+            font-family: var(--fonte-principal);
+            font-size: 1.4em; /* Tamanho maior para destacar */
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--cor-primaria); /* Cor primária para destaque */
+        }
+
+        .final-cta-container .price-info-final span {
+            font-size: 0.9em;
+            font-weight: 400;
+            color: var(--cor-texto-escuro); /* Cor mais suave para o parcelamento */
+        }
+
+        /* Estilo para o botão final, se necessário diferenciá-lo */
+        .final-cta-button {
+            display: inline-block;
+            padding: 18px 40px; /* Botão um pouco maior */
+            background-color: var(--cor-secundaria); /* Amarelo */
+            color: var(--cor-primaria); /* Texto roxo */
+            font-family: var(--fonte-principal);
+            font-size: 1.3em; /* Tamanho de fonte maior */
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(251, 192, 45, 0.5); /* Sombra correspondente ao amarelo */
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .final-cta-button:hover {
+            background-color: var(--cor-destaque); /* Laranja no hover */
+            color: var(--cor-texto-claro);
+            box-shadow: 0 10px 25px rgba(230, 81, 0, 0.4);
+            transform: translateY(-3px);
+        }
+
+        footer {
+            background-color: var(--cor-footer);
+            color: var(--cor-texto-claro);
+            padding: 25px 0; /* Reduzido padding vertical */
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        footer p {
+            margin-bottom: 5px; /* Reduzido margin inferior */
+        }
+
+        /* Responsividade */
+        @media (max-width: 991px) {
+            .site-header .container {
+                flex-direction: column; /* Empilha logo e nav em telas pequenas */
+            }
+            .main-nav {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: center; /* Centraliza os links */
+            }
+            .main-nav ul {
+                flex-direction: column; /* Links em coluna */
+                align-items: center;
+            }
+            .main-nav li {
+                margin-left: 0;
+                margin-bottom: 10px; /* Espaço entre os links */
+            }
+            .menu-toggle {
+                display: block; /* Mostra o ícone do menu */
+                position: absolute; /* Posiciona o ícone no canto */
+                top: 15px;
+                right: 20px;
+            }
+            .main-nav ul.active { /* Estilo para o menu aberto */
+                display: flex;
+            }
+            .main-nav ul {
+                display: none; /* Menu fechado por padrão */
+                width: 100%;
+                text-align: center;
+            }
+
+            body {
+                padding-top: 120px; /* Aumenta o padding-top devido ao header empilhado */
+            }
+             .section--hero {
+                padding-top: 20px; /* Mantém padding top ajustado */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section--hero h1 {
+                font-size: 2.3em;
+            }
+            .section--hero p {
+                font-size: 1em;
+            }
+            .section {
+                padding: 40px 0;
+            }
+            .section h2 {
+                font-size: 2em;
+            }
+            .benefits-grid, .target-audience-grid {
+                grid-template-columns: 1fr;
+            }
+            .benefit-card, .target-card {
+                width: 100%;
+            }
+            .delivery-content .icon-text {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px 15px;
+            }
+            .delivery-content .icon-text i {
+                margin-bottom: 10px;
+                margin-right: 0;
+            }
+            .bonus-content ul {
+                 text-align: center;
+                 display: block;
+            }
+            .final-cta-container {
+                padding: 0 15px; /* Adiciona padding lateral em telas pequenas */
+            }
+            .final-cta-container .price-info-final {
+                font-size: 1.1em;
+            }
+            .final-cta-button {
+                width: 100%; /* Botão ocupa a largura toda */
+                padding: 15px;
+                font-size: 1.1em;
+            }
+            .testimonials-grid {
+                grid-template-columns: 1fr; /* Coluna única em telas menores */
+            }
+            .testimonial-card {
+                margin-bottom: 30px; /* Espaço entre os cards em tela pequena */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section--hero h1 {
+                font-size: 2em;
+            }
+            .cta-button {
+                width: 90%;
+            }
+            .section h2 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1 class="site-title">Pacote Digital Ministerial</h1>
+            <button class="menu-toggle" aria-label="Abrir menu">☰</button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#beneficios">Benefícios</a></li>
+                    <li><a href="#bonus">Bônus</a></li>
+                    <li><a href="#entrega">Entrega</a></li>
+                    <li><a href="#garantia">Garantia</a></li>
+                    <li><a href="#depoimentos">Depoimentos</a></li> <!-- Link para a nova seção -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section section--hero" id="inicio">
+        <div class="container">
+            <h1>O Pacote Digital que Vai Revolucionar Seu Ministério</h1>
+            <p>Tudo o que você precisa para fortalecer sua fé e elevar sua música, reunido em um só lugar.</p>
+            <!-- Primeiro CTA sem informações de parcelamento -->
+            <a href="https://pay.hotmart.com/A101831344R?bid=1757471207852" class="cta-button">QUERO MEU PACOTE AGORA</a>
+        </div>
+    </section>
+
+    <section class="section section--benefits" id="beneficios">
+        <div class="container">
+            <h2>O que você encontrará neste pacote</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="icon-container"><i class="fas fa-music"></i></div>
+                    <h3>Encore 5</h3>
+                    <p>Crie, edite e imprima partituras com qualidade profissional.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon-container"><i class="fas fa-book-open"></i></div>
+                    <h3>Bíblia Digital</h3>
+                    <p>Estude com profundidade e praticidade, onde estiver.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon-container"><i class="fas fa-microphone"></i></div>
+                    <h3>237 Playbacks Gospel</h3>
+                    <p>Louvor com excelência, para ensaios e ministrações.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon-container"><i class="fas fa-bible"></i></div>
+                    <h3>Harpa Cristã Digital</h3>
+                    <p>Todos os hinos com letras e áudio, sempre à mão.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bonus-section" id="bonus">
+        <div class="container">
+            <h2>Bônus Especial: Leve seu ministério ainda mais longe!</h2>
+            <div class="bonus-content">
+                <div class="text-content">
+                    <h3>Manual do Pregador + 16 mil Partituras em PDF</h3>
+                    <ul>
+                        <li><i class="fas fa-book"></i> Manual do Pregador: Ferramentas para pregações impactantes e edificantes.</li>
+                        <li><i class="fas fa-file-pdf"></i> 16 Mil Partituras em PDF: Um acervo imenso para enriquecer seu repertório musical.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section delivery-section" id="entrega">
+        <div class="container">
+            <h2>Receba tudo via Google Drive</h2>
+            <div class="delivery-content">
+                <div class="icon-text">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Acesso imediato e organizado pelo Google Drive.</p>
+                </div>
+                <div class="icon-text">
+                    <i class="fas fa-cog"></i>
+                    <p>Instalação guiada e suporte completo para você não ter dores de cabeça.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section target-audience-section">
+        <div class="container">
+            <h2>Ideal para você que quer ir além</h2>
+            <div class="target-audience-grid">
+                <div class="target-card">
+                    <div class="icon-container"><i class="fas fa-users"></i></div>
+                    <p>Músicos</p>
+                </div>
+                <div class="target-card">
+                    <div class="icon-container"><i class="fas fa-hand-holding-heart"></i></div>
+                    <p>Líderes de Louvor</p>
+                </div>
+                <div class="target-card">
+                    <div class="icon-container"><i class="fas fa-microphone"></i></div>
+                    <p>Pregadores</p>
+                </div>
+                <div class="target-card">
+                    <div class="icon-container"><i class="fas fa-church"></i></div>
+                    <p>Igrejas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Garantia -->
+    <section class="section guarantee-section" id="garantia">
+        <div class="container">
+            <h2><span class="highlight">Garantia de 7 Dias</span> - Risco Zero Para Você!</h2>
+            <p>Compre agora e tenha 7 dias para decidir se o pacote é para você! O pacote conta com uma garantia 100% de satisfação. Ou seja, você tem 7 dias para acessar o conteúdo do pacote, e se ainda achar que não é para você, basta pedir reembolso e devolverei integralmente seu dinheiro. Sem perguntas e questionamentos. Nesse caso, os riscos serão todos meus.</p>
+        </div>
+    </section>
+
+    <!-- Seção de Depoimentos -->
+    <section class="testimonials-section" id="depoimentos">
+        <div class="container">
+            <h2>O que nossos clientes dizem</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="quote">"Este pacote revolucionou completamente a forma como preparo meus louvores. A qualidade dos playbacks e a facilidade do Encore 5 são incríveis!"</p>
+                    <p class="author">- Pr. João Silva</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="quote">"Finalmente encontrei tudo o que precisava em um só lugar. A Bíblia digital e a Harpa Cristã sempre à mão facilitam muito o meu dia a dia de estudo e ministério."</p>
+                    <p class="author">- Pastora Ana Clara</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="quote">"Os bônus são um diferencial enorme! O Manual do Pregador me deu novas ideias e as partituras adicionais enriqueceram nosso repertório."</p>
+                    <p class="author">- Maestro Roberto Costa</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Container para preço e botão final -->
+    <div class="final-cta-container">
+        <div class="price-info-final">
+            <span>ou</span> 6x de R$ 7,99<br>
+            R$ 47,90 à vista
+        </div>
+        <a href="https://pay.hotmart.com/A101831344R?bid=1757471207852" class="final-cta-button">QUERO MEU PACOTE AGORA</a>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Pacote Digital Ministerial - 2025 Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Script para scroll suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Calcula a posição do alvo subtraindo a altura do header fixo
+                    const headerOffset = document.querySelector('.site-header').offsetHeight;
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerOffset;
+                    window.scrollTo({ top: elementPosition, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Script para o menu mobile
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mainNavUl = document.querySelector('.main-nav ul');
+
+        menuToggle.addEventListener('click', function() {
+            mainNavUl.classList.toggle('active');
+        });
+
+        // Fecha o menu quando um link é clicado (em telas menores)
+        document.querySelectorAll('.main-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                // Verifica se o menu está ativo antes de tentar remover a classe
+                if (mainNavUl.classList.contains('active')) {
+                    mainNavUl.classList.remove('active');
+                }
+            });
+        });
+
+        // Fecha o menu se clicar fora dele
+        document.addEventListener('click', function(event) {
+            // Verifica se o clique não está dentro do menu e nem é no botão de toggle
+            if (!mainNavUl.contains(event.target) && !menuToggle.contains(event.target) && mainNavUl.classList.contains('active')) {
+                mainNavUl.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
